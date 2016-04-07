@@ -1,0 +1,5 @@
+package edu.nyu.gh.api.service;
+
+public class AccountService {
+
+}
