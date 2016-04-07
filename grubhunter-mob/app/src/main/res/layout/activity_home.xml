@@ -18,8 +18,8 @@
         android:layout_height="200dp"
         android:id="@+id/imageView"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/logo2"
-        android:paddingBottom="50dp"/>
+        android:paddingBottom="50dp"
+        android:src="@drawable/logo1"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -52,7 +52,7 @@
         android:id="@+id/button"
         android:layout_below="@+id/editText2"
         android:layout_centerHorizontal="true"
-        android:background="@color/blue2"/>
+        android:background="@color/colorPrimaryDark"/>
 
     <TextView
         android:layout_width="wrap_content"
