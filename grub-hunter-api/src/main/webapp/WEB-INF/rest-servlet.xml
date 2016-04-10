@@ -21,12 +21,16 @@
     </cxf:bus>
 
 	<bean id="accountService" class="edu.nyu.gh.api.service.AccountService" init-method="init"></bean>
+	<bean id="authenticationService" class="edu.nyu.gh.api.service.AuthenticationService"></bean>
+	<bean id="registrationService" class="edu.nyu.gh.api.service.RegistrationService"></bean>
 	<bean id="jsonProvider" 
 		class="org.codehaus.jackson.jaxrs.JacksonJsonProvider"/>
 	
   	<jaxrs:server id="accountrs" address="/rservice">
   		<jaxrs:serviceBeans>
   			<ref bean="accountService"/>
+  			<ref bean="authenticationService"/>
+  			<ref bean="registrationService"/>
   		</jaxrs:serviceBeans>
   		<jaxrs:providers>
 			<ref bean='jsonProvider' />
