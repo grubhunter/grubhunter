@@ -35,7 +35,7 @@ with open("error-"+sys.argv[1]+".txt","w") as err_file:
                         start_at = start_at+10
         except Exception as e:
             err_file.write(line+"\n")
-            err_file.write(e)
+            err_file.write(str(e))
             err_file.write("\n\n")    
         cnt = cnt + 1
 
