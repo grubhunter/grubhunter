@@ -1,37 +1,104 @@
-<RelativeLayout
-    android:id="@+id/main_layout"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="fill_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="edu.nyu.gh.grubhunter_mob.Home"
+    android:orientation="vertical"
+    android:background="@color/white1"
+    android:alpha="0.95"
+    android:gravity="center">
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
         android:layout_alignParentTop="true"
-        android:background="?attr/colorPrimary"
-        android:elevation="6dp"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        android:gravity="center"
+        android:background="@drawable/logo1"
+        android:layout_gravity="center"
+        tools:context=".Listing_page">
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tab_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar"
-        android:background="?attr/colorPrimary"
-        android:elevation="6dp"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+        <android.support.v7.widget.Toolbar
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:id="@+id/tool_bar"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="false"
+            android:layout_alignParentStart="false"
+            android:layout_marginTop="75dp" />
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/pager"
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:background="#2196F3"
+            android:layout_alignTop="@+id/tool_bar"
+            android:layout_alignParentStart="true" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignBottom="@+id/tabs"
+            android:layout_alignTop="@+id/tool_bar" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/footer"
         android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:background="#689F38"
+        android:gravity="center"
+        android:layout_gravity="center">
+        <TextView
+            android:id="@+id/footer_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:textColor="#FFFFFF"
+            android:gravity="center"
+            android:textSize="25sp"/>
+    </RelativeLayout>
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@id/tab_layout"/>
+        android:fillViewport="true"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/header">
+
+        <LinearLayout
+            android:id="@+id/myLayout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:fillViewport="true"
+            android:textAlignment="center">
+            <TextView
+                android:id="@+id/bodytext"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:text="result1"
+                android:textAlignment="textStart"
+                android:textColor="#f44336"
+                android:gravity="center"
+                android:textSize="25sp"/>
+            <Button
+                android:id="@+id/btn_act"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="View"
+                android:textAlignment="inherit"
+                android:layout_marginLeft="250dp">
+            </Button>
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>
