@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * Created by student on 4/24/16.
  */
-public class Listing_page extends AppCompatActivity {
+public class TabView extends AppCompatActivity {
     //Declaring All The Variables Needed
 
     private Toolbar toolbar;

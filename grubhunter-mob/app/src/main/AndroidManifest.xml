@@ -38,6 +38,11 @@
         </activity>
         <activity android:name=".Listing_page" >
         </activity>
+        <activity
+            android:name=".TabView"
+            android:label="@string/title_activity_tab_view"
+            android:theme="@style/AppTheme" >
+        </activity>
     </application>
 
 </manifest>

@@ -86,10 +86,9 @@
                 android:layout_width="fill_parent"
                 android:layout_height="40dp"
                 android:text="result1"
-                android:textAlignment="textStart"
-                android:textColor="#f44336"
                 android:gravity="center"
-                android:textSize="25sp"/>
+                android:textSize="25sp"
+                android:textIsSelectable="true" />
             <Button
                 android:id="@+id/btn_act"
                 android:layout_width="fill_parent"
