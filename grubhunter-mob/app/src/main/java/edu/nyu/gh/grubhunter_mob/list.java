@@ -34,16 +34,35 @@ public class list extends AppCompatActivity {
                 "Luciano's",
                 "Grimaldis",
                 "Clinton St Baking Co"};
+        MyData[] myDataArray = new MyData[]{
+                new MyData("The River Cafe", 10, "5.0"),
+                new MyData("Once Upon a Tart", 20, "4.5"),
+                new MyData("Cheryl's Global Soul", 30, "4.5"),
+                new MyData("Cafe Luluc", 10, "4.0"),
+                new MyData("Giorgio's of Gramercy", 20, "4"),
+                new MyData("Solas", 30, "3.5"),
+                new MyData("Metaphor", 10, "3.5"),
+                new MyData("Cafe Henry", 20, "3.5"),
+                new MyData("Deletica", 30, "3.0"),
+                new MyData("David Burke Fabrick", 10, "3.0"),
+                new MyData("Le Defense", 20, "3.0"),
+                new MyData("Luciano's", 30, "3.0"),
+                new MyData("Grimaldis", 10, "3.0"),
+                new MyData("Clinton St Baking Co", 20, "3.0")
 
-        ArrayAdapter<String> myAdapter=new
-                ArrayAdapter<String>(
-                this,
-                R.layout.list_item,
-                myStringArray);
 
-        ListView myList=(ListView)
+        };
+
+        MyAdapter myAdapter=new
+                MyAdapter(this,
+                R.layout.mylayout,
+                myDataArray);
+        ListView myList = (ListView)
                 findViewById(R.id.listView);
         myList.setAdapter(myAdapter);
+
+
+
 
         AdapterView.OnItemClickListener
                 mMessageClickedHandler =
@@ -59,14 +78,7 @@ public class list extends AppCompatActivity {
                             myLayout.addView(w);
                         }
                     };
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
     }
 
 }
