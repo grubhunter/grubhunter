@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance=
+        "?android:attr/textAppearanceLarge"
+    android:text="Large Text"
+    xmlns:android=
+        "http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="@layout/activity_list" tools:context="edu.nyu.gh.grubhunter_mob.list">
+
+android:id="@+id/textView">
+</TextView>

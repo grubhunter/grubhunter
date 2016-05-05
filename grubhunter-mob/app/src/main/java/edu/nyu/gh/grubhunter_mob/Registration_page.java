@@ -28,7 +28,7 @@ public class Registration_page extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                Intent i = new Intent(getApplicationContext(), Listing_page.class);
+                Intent i = new Intent(getApplicationContext(), list.class);
                 startActivity(i);
             }
         });

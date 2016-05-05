@@ -21,31 +21,6 @@
         android:background="@drawable/logo1"
         android:layout_gravity="center"
         tools:context=".Listing_page">
-
-        <android.support.v7.widget.Toolbar
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:id="@+id/tool_bar"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="false"
-            android:layout_alignParentStart="false"
-            android:layout_marginTop="75dp" />
-
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tabs"
-            android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:background="#2196F3"
-            android:layout_alignTop="@+id/tool_bar"
-            android:layout_alignParentStart="true" />
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewpager"
-            android:layout_width="match_parent"
-            android:layout_height="75dp"
-            android:layout_centerHorizontal="true"
-            android:layout_alignBottom="@+id/tabs"
-            android:layout_alignTop="@+id/tool_bar" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -89,14 +64,6 @@
                 android:gravity="center"
                 android:textSize="25sp"
                 android:textIsSelectable="true" />
-            <Button
-                android:id="@+id/btn_act"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="View"
-                android:textAlignment="inherit"
-                android:layout_marginLeft="250dp">
-            </Button>
         </LinearLayout>
     </ScrollView>
 
