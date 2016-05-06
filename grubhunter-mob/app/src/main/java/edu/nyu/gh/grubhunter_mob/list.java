@@ -1,5 +1,6 @@
 package edu.nyu.gh.grubhunter_mob;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 public class list extends AppCompatActivity {
 
@@ -60,24 +62,21 @@ public class list extends AppCompatActivity {
         ListView myList = (ListView)
                 findViewById(R.id.listView);
         myList.setAdapter(myAdapter);
+        myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                Toast.makeText(getApplicationContext(),
+                        "Click ListItem Number " + position, Toast.LENGTH_LONG)
+                        .show();
+                // Perform action on click
+                Intent i = new Intent(getApplicationContext(), ScrollingActivity.class);
+                startActivity(i);
+            }
+        });
 
 
 
-
-        AdapterView.OnItemClickListener
-                mMessageClickedHandler =
-                    new AdapterView.OnItemClickListener() {
-                        public void onItemClick(AdapterView parent,
-                                                View v,
-                                                int position,
-                                                long id) {
-                            TextView w=new TextView(getApplicationContext());
-                            w.setText(((TextView) v).getText());
-                            RelativeLayout myLayout=
-                                    (RelativeLayout) findViewById(R.id.rel_layout);
-                            myLayout.addView(w);
-                        }
-                    };
 
     }
 

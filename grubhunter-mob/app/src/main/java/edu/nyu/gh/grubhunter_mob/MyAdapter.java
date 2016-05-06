@@ -26,6 +26,7 @@ public class MyAdapter extends ArrayAdapter<MyData> {
         this.resource=resource;
         this.objects=objects;
     }
+
     @Override
     public View getView(int position,
                         View convertView,

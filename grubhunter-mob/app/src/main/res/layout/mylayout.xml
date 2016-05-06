@@ -15,6 +15,7 @@
         android:numStars="5"
         android:rating="2"
         android:stepSize=".5"
+        android:isIndicator="true"
         android:layout_gravity="right" />
     <TextView
         android:id="@+id/number"
