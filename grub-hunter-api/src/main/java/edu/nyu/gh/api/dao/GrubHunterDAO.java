@@ -53,5 +53,41 @@ public class GrubHunterDAO {
 			pstmnt.executeUpdate();
 		}
 	}
+	
+	public void updatePreferences(String email,int[] dishPrefs) throws SQLException {
+		Connection con = getRemoteConnection();
+		PreparedStatement pstmnt = con.prepareStatement("DELETE FROM dish_preferences WHERE email=?");
+		pstmnt.setString(1, email);
+		pstmnt.executeUpdate();
+		for(int pref:dishPrefs){
+			pstmnt = con.prepareStatement("INSERT INTO dish_preferences (email,dish_id) values (?,?)");
+			pstmnt.setString(1, email);
+			pstmnt.setInt(2, pref);
+			pstmnt.executeUpdate();
+		}
+	}
+	
+	public void insertRatings(String email,int restaurantId, int dishId, String rating) throws SQLException {
+		Connection con = getRemoteConnection();
+		PreparedStatement pstmnt = con.prepareStatement("INSERT INTO user_rating (email,restaurant_id, dish_id, dish_rating) values (?,?,?,?)");
+		pstmnt.setString(1, email);
+		pstmnt.setInt(2, restaurantId);
+		pstmnt.setInt(3, dishId);
+		pstmnt.setString(4, rating);
+		pstmnt.executeUpdate();
+	}
+	
+	public ResultSet fetchUserRecommendations(String userId) throws SQLException {
+		Connection con = getRemoteConnection();
+		PreparedStatement pstmnt = con.prepareStatement("SELECT email, user_recommendations.restaurant_id,name,near,address, "
+				+ "price, reviews, rating, user_recommendations.dish_id, dish_name, dish_rating "
+				+ "from user_recommendations join restaurant on(id=restaurant_id) "
+				+ "join dishes_available on(dishes_available.dish_id=user_recommendations.dish_id) "
+				+ "join restaurant_dishes on(restaurant_dishes.dish_id=user_recommendations.dish_id "
+				+ "and restaurant_dishes.restaurant_id=user_recommendations.restaurant_id) "
+				+ "where email=? order by user_recommendations.restaurant_id asc");
+		pstmnt.setString(1, userId);
+		return pstmnt.executeQuery();
+	}
 
 }

@@ -2,6 +2,8 @@ package edu.nyu.gh.api.service;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -13,17 +15,22 @@ import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationExceptio
 
 import edu.nyu.gh.api.dao.GrubHunterDAO;
 import edu.nyu.gh.api.model.AuthRequest;
+import edu.nyu.gh.api.model.Dish;
+import edu.nyu.gh.api.model.GrubSimpleRequest;
 import edu.nyu.gh.api.model.GrubSimpleResponse;
+import edu.nyu.gh.api.model.Recommendation;
 import edu.nyu.gh.api.model.RegistrationRequest;
+import edu.nyu.gh.api.model.UpdatePreferenceRequest;
+import edu.nyu.gh.api.model.UpdateRatingsRequest;
 
 @Path("/api")
 public class GrubHunterService {
 	/**
 	 * service - login service
 	 * service - user registration service
-	 * TODO user preference update service
-	 * TODO fetch user recommendation service
-	 * TODO user update review status
+	 * service - user preference update service
+	 * service - fetch user recommendation service
+	 * service - user update review status
 	 * */
 
 	@POST
@@ -62,6 +69,90 @@ public class GrubHunterService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return new GrubSimpleResponse("already registered");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new GrubSimpleResponse("failure");
+	}
+	
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/update-preference")
+	public GrubSimpleResponse updatePreferences(UpdatePreferenceRequest request){
+		System.out.println("Got update prefs>>"+request.getEmail());
+		try {
+			new GrubHunterDAO().updatePreferences(request.getEmail(), request.getCategories());
+			return new GrubSimpleResponse("success");
+		} catch (MySQLIntegrityConstraintViolationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new GrubSimpleResponse("duplicate dish added");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new GrubSimpleResponse("failure");
+	}
+	
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/recommendations")
+	public List<Recommendation> fetchRecommendations(GrubSimpleRequest request){
+		System.out.println("Got recommendation request>>"+request.getUserId());
+		List<Recommendation> recommendations = new ArrayList<>();
+		try {
+			ResultSet rs = new GrubHunterDAO().fetchUserRecommendations(request.getUserId());
+			int prev = 0;
+			
+			Recommendation rec = null;
+			List<Dish> dishes = null;
+			while(rs.next()){
+				int id = rs.getInt(2);
+				if(prev != id){
+					if(rec != null){
+						recommendations.add(rec);
+					}
+					rec = new Recommendation();
+					rec.setRestaurantId(id);
+					rec.setRestaurantName(rs.getString(3));
+					rec.setRestaurantNear(rs.getString(4));
+					rec.setAddress(rs.getString(5));
+					rec.setPrice(rs.getString(6));
+					rec.setReviews(rs.getString(7));
+					rec.setRating(rs.getString(8));
+					dishes = new ArrayList<>();
+					prev = id;
+				}
+				Dish dish = new Dish();
+				dish.setDishId(rs.getInt(9));
+				dish.setDishName(rs.getString(10));
+				dish.setRating(rs.getString(11));
+				dishes.add(dish);
+				rec.setDishes(dishes);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return recommendations;
+	}
+	
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/rate-dish")
+	public GrubSimpleResponse rateDish(UpdateRatingsRequest request){
+		System.out.println("Got update ratings>>"+request.getEmail());
+		try {
+			new GrubHunterDAO().insertRatings(request.getEmail(), request.getRestaurantId(),
+					request.getDishId(), request.getRating());
+			return new GrubSimpleResponse("success");
+		} catch (MySQLIntegrityConstraintViolationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new GrubSimpleResponse("duplicate rating for dish");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
