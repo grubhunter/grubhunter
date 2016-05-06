@@ -36,21 +36,21 @@ public class list extends AppCompatActivity {
                 "Luciano's",
                 "Grimaldis",
                 "Clinton St Baking Co"};
-        MyData[] myDataArray = new MyData[]{
-                new MyData("The River Cafe", 10, "5.0"),
-                new MyData("Once Upon a Tart", 20, "4.5"),
-                new MyData("Cheryl's Global Soul", 30, "4.5"),
-                new MyData("Cafe Luluc", 10, "4.0"),
-                new MyData("Giorgio's of Gramercy", 20, "4"),
-                new MyData("Solas", 30, "3.5"),
-                new MyData("Metaphor", 10, "3.5"),
-                new MyData("Cafe Henry", 20, "3.5"),
-                new MyData("Deletica", 30, "3.0"),
-                new MyData("David Burke Fabrick", 10, "3.0"),
-                new MyData("Le Defense", 20, "3.0"),
-                new MyData("Luciano's", 30, "3.0"),
-                new MyData("Grimaldis", 10, "3.0"),
-                new MyData("Clinton St Baking Co", 20, "3.0")
+        final MyData[] myDataArray = new MyData[]{
+                new MyData("The River Cafe", "address", "5.0","landmark","price range","no of reviews","dishes"),
+                new MyData("Once Upon a Tart", "address", "4.5","landmark","price range","no of reviews","dishes"),
+                new MyData("Cheryl's Global Soul", "address", "4.5","landmark","price range","no of reviews","dishes"),
+                new MyData("Cafe Luluc", "address", "4.0","landmark","price range","no of reviews","dishes"),
+                new MyData("Giorgio's of Gramercy", "address", "4","landmark","price range","no of reviews","dishes"),
+                new MyData("Solas", "address", "3.5","landmark","price range","no of reviews","dishes"),
+                new MyData("Metaphor", "address", "3.5","landmark","price range","no of reviews","dishes"),
+                new MyData("Cafe Henry", "address", "3.5","landmark","price range","no of reviews","dishes"),
+                new MyData("Deletica", "address", "3.0","landmark","price range","no of reviews","dishes"),
+                new MyData("David Burke Fabrick", "address", "3.0","landmark","price range","no of reviews","dishes"),
+                new MyData("Le Defense", "address", "3.0","landmark","price range","no of reviews","dishes"),
+                new MyData("Luciano's", "address", "3.0","landmark","price range","no of reviews","dishes"),
+                new MyData("Grimaldis", "address", "3.0","landmark","price range","no of reviews","dishes"),
+                new MyData("Clinton St Baking Co", "address", "3.0","landmark","price range","no of reviews","dishes")
 
 
         };
@@ -66,11 +66,20 @@ public class list extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
+                TextView v = (TextView)view.findViewById(R.id.title); String itemId = v.getText().toString();
                 Toast.makeText(getApplicationContext(),
-                        "Click ListItem Number " + position, Toast.LENGTH_LONG)
+                        String.format("Click ListItem Number %d%s", position, itemId), Toast.LENGTH_LONG)
                         .show();
+
                 // Perform action on click
                 Intent i = new Intent(getApplicationContext(), ScrollingActivity.class);
+                i.putExtra("myTitle", myDataArray[position].myTitle);
+                i.putExtra("myNum", myDataArray[position].myNum);
+                i.putExtra("myRating", myDataArray[position].myRating);
+                i.putExtra("landmark", myDataArray[position].landmark);
+                i.putExtra("noReviews", myDataArray[position].priceRange);
+                i.putExtra("noReviews", myDataArray[position].noReviews);
+                i.putExtra("dishes", myDataArray[position].dishes);
                 startActivity(i);
             }
         });

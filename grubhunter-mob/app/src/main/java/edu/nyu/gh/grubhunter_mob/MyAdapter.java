@@ -42,8 +42,8 @@ public class MyAdapter extends ArrayAdapter<MyData> {
                 row.findViewById(id.ratingBar);
         title.setText((CharSequence)
                 objects[position].myTitle);
-        number.setText(Integer.toString(
-                objects[position].myNum));
+        number.setText((CharSequence)
+                objects[position].myNum);
         float rating = Float.parseFloat(objects[position].myRating);
         rbar.setRating(rating);
         title.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.user, 0, 0, 0);

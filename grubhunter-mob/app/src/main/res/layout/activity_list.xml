@@ -22,6 +22,7 @@
         android:layout_gravity="top|right" android:layout_marginTop="95dp"
         android:src="@android:drawable/ic_menu_sort_by_size"
         android:adjustViewBounds="false"
-        android:clickable="true" />
+        android:clickable="true"
+        style="@style/Widget.AppCompat.ActionButton" />
 
 </android.support.design.widget.CoordinatorLayout>
