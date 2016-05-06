@@ -5,20 +5,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name="RegistrationRequest")
 public class RegistrationRequest {
 
-	private String userName;
 	private String password;
 	private String firstName;
 	private String lastName;
 	private String email;
 	private String phone;
-	private String[] categories;
+	private int[] categories;
 	
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
 	public String getPassword() {
 		return password;
 	}
@@ -49,10 +42,10 @@ public class RegistrationRequest {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String[] getCategories() {
+	public int[] getCategories() {
 		return categories;
 	}
-	public void setCategories(String[] categories) {
+	public void setCategories(int[] categories) {
 		this.categories = categories;
 	}
 	

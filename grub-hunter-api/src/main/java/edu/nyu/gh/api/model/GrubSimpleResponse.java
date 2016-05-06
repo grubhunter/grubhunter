@@ -3,9 +3,9 @@ package edu.nyu.gh.api.model;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="AuthResponse")
-public class AuthResponse {
+public class GrubSimpleResponse {
 	
-	public AuthResponse(String status) {
+	public GrubSimpleResponse(String status) {
 		this.status = status;
 	}
 

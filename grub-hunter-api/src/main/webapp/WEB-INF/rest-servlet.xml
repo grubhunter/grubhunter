@@ -20,17 +20,17 @@
         </cxf:features>
     </cxf:bus>
 
-	<bean id="accountService" class="edu.nyu.gh.api.service.AccountService" init-method="init"></bean>
+	<!-- <bean id="accountService" class="edu.nyu.gh.api.service.AccountService" init-method="init"></bean>
 	<bean id="authenticationService" class="edu.nyu.gh.api.service.AuthenticationService"></bean>
-	<bean id="registrationService" class="edu.nyu.gh.api.service.RegistrationService"></bean>
-	<bean id="jsonProvider" 
-		class="org.codehaus.jackson.jaxrs.JacksonJsonProvider"/>
+	<bean id="registrationService" class="edu.nyu.gh.api.service.RegistrationService"></bean>  -->
 	
-  	<jaxrs:server id="accountrs" address="/rservice">
+	
+	<bean id="grubHunterService" class="edu.nyu.gh.api.service.GrubHunterService"/>
+	<bean id="jsonProvider" class="org.codehaus.jackson.jaxrs.JacksonJsonProvider"/>
+	
+  	<jaxrs:server id="grubhunter-rs" address="/grubhunter">
   		<jaxrs:serviceBeans>
-  			<ref bean="accountService"/>
-  			<ref bean="authenticationService"/>
-  			<ref bean="registrationService"/>
+  			<ref bean="grubHunterService"/>
   		</jaxrs:serviceBeans>
   		<jaxrs:providers>
 			<ref bean='jsonProvider' />
