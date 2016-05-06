@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.content.Intent;
 
 /**
  * Created by suhasmanjunath on 4/7/16.
@@ -23,6 +24,14 @@ public class Registration_page extends AppCompatActivity {
         String[] items = new String[]{"American","Chinese","Continental", "Indian","Mediterranean", "Thai"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
+        final Button button = (Button) findViewById(R.id.textView);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                Intent i = new Intent(getApplicationContext(), list.class);
+                startActivity(i);
+            }
+        });
 
     }
 }
