@@ -31,6 +31,7 @@ public class GrubHunterService {
 	 * service - user preference update service
 	 * service - fetch user recommendation service
 	 * service - user update review status
+	 * service - get available dishes
 	 * */
 
 	@POST
@@ -53,7 +54,28 @@ public class GrubHunterService {
 			e.printStackTrace();
 		}
 		return new GrubSimpleResponse("failure");
-	} 
+	}
+	
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/available-dishes")
+	public List<Dish> fetchDishes(AuthRequest request){
+		System.out.println("Got fetch dishes>>");
+		List<Dish> dishes = new ArrayList<>();
+		try {
+			ResultSet rs = new GrubHunterDAO().fetchDishes();
+			while(rs.next()){
+				Dish dish = new Dish();
+				dish.setDishId(rs.getInt(1));
+				dish.setDishName(rs.getString(2));
+				dishes.add(dish);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return dishes;
+	}
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)

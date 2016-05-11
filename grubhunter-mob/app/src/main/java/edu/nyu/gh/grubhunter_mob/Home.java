@@ -2,10 +2,10 @@ package edu.nyu.gh.grubhunter_mob;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,7 +30,7 @@ public class Home extends AppCompatActivity implements RESTfulResult {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.home);
         appContext = this;
 
         final TextView register = (TextView) findViewById(R.id.textView);
@@ -38,7 +38,7 @@ public class Home extends AppCompatActivity implements RESTfulResult {
         register.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                Intent i = new Intent(getApplicationContext(),Registration_page.class);
+                Intent i = new Intent(getApplicationContext(),Registration.class);
                 startActivity(i);
             }
         });
@@ -53,6 +53,12 @@ public class Home extends AppCompatActivity implements RESTfulResult {
         AuthRequest request = new AuthRequest();
         request.setUserId(userId.getText().toString());
         request.setPassword(password.getText().toString());
+
+        SharedPreferences sp=getSharedPreferences("Login", Context.MODE_PRIVATE);
+        SharedPreferences.Editor ed=sp.edit();
+        ed.putString("user", userId.getText().toString());
+        ed.commit();
+
         Map<String, Object> loginMap = new HashMap<String, Object>();
         loginMap.put("url", Util.getProperty("login_url", appContext));
         loginMap.put("data", request);
@@ -66,10 +72,15 @@ public class Home extends AppCompatActivity implements RESTfulResult {
         Gson gson = new Gson();
         GrubSimpleResponse response = gson.fromJson(result, GrubSimpleResponse.class);
         if(response.getStatus().equals("success")){
-            Intent i = new Intent(getApplicationContext(), list.class);
+            //Intent i = new Intent(getApplicationContext(), list.class);
+            Intent i = new Intent(getApplicationContext(), Listing.class);
             startActivity(i);
         }else{
-            Toast.makeText(this, "Cannot identify user. Register if you are a new user!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Cannot identify user credentials. Register if you are a new user!", Toast.LENGTH_LONG).show();
+            SharedPreferences sp=this.getSharedPreferences("Login", Context.MODE_PRIVATE);
+            SharedPreferences.Editor ed=sp.edit();
+            ed.putString("user", null);
+            ed.commit();
         }
     }
 }

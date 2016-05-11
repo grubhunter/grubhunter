@@ -36,6 +36,12 @@ public class GrubHunterDAO {
 		pstmnt.setString(1, userId);
 		return pstmnt.executeQuery();
 	}
+	
+	public ResultSet fetchDishes() throws SQLException {
+		Connection con = getRemoteConnection();
+		PreparedStatement pstmnt = con.prepareStatement("SELECT dish_id,dish_name FROM dishes_available");
+		return pstmnt.executeQuery();
+	}
 
 	public void registerUser(String email, String password, String fname, String lname, String phone, int[] dishPrefs) throws SQLException {
 		Connection con = getRemoteConnection();
@@ -52,6 +58,13 @@ public class GrubHunterDAO {
 			pstmnt.setInt(2, pref);
 			pstmnt.executeUpdate();
 		}
+		pstmnt = con.prepareStatement("INSERT INTO user_recommendations (email,restaurant_id,dish_id) "
+				+ "SELECT ?,restaurant_id,dish_id from restaurant_dishes "
+				+ "where dish_id in (SELECT dish_id from dish_preferences "
+				+ "where email=?)");
+		pstmnt.setString(1, email);
+		pstmnt.setString(2, email);
+		pstmnt.executeUpdate();
 	}
 	
 	public void updatePreferences(String email,int[] dishPrefs) throws SQLException {
@@ -65,11 +78,26 @@ public class GrubHunterDAO {
 			pstmnt.setInt(2, pref);
 			pstmnt.executeUpdate();
 		}
+		pstmnt = con.prepareStatement("DELETE FROM user_recommendations WHERE email=?");
+		pstmnt.setString(1, email);
+		pstmnt.executeUpdate();
+		pstmnt = con.prepareStatement("INSERT INTO user_recommendations (email,restaurant_id,dish_id) "
+				+ "SELECT ?,restaurant_id,dish_id from restaurant_dishes "
+				+ "where dish_id in (SELECT dish_id from dish_preferences "
+				+ "where email=?)");
+		pstmnt.setString(1, email);
+		pstmnt.setString(2, email);
+		pstmnt.executeUpdate();
 	}
 	
 	public void insertRatings(String email,int restaurantId, int dishId, String rating) throws SQLException {
 		Connection con = getRemoteConnection();
-		PreparedStatement pstmnt = con.prepareStatement("INSERT INTO user_rating (email,restaurant_id, dish_id, dish_rating) values (?,?,?,?)");
+		PreparedStatement pstmnt = con.prepareStatement("DELETE FROM user_rating where email=? AND restaurant_id=? AND dish_id=?");
+		pstmnt.setString(1, email);
+		pstmnt.setInt(2, restaurantId);
+		pstmnt.setInt(3, dishId);
+		pstmnt.executeUpdate();
+		pstmnt = con.prepareStatement("INSERT INTO user_rating (email,restaurant_id, dish_id, dish_rating) values (?,?,?,?)");
 		pstmnt.setString(1, email);
 		pstmnt.setInt(2, restaurantId);
 		pstmnt.setInt(3, dishId);
@@ -85,7 +113,7 @@ public class GrubHunterDAO {
 				+ "join dishes_available on(dishes_available.dish_id=user_recommendations.dish_id) "
 				+ "join restaurant_dishes on(restaurant_dishes.dish_id=user_recommendations.dish_id "
 				+ "and restaurant_dishes.restaurant_id=user_recommendations.restaurant_id) "
-				+ "where email=? order by user_recommendations.restaurant_id asc");
+				+ "where email=? order by user_recommendations.restaurant_id asc LIMIT 50");
 		pstmnt.setString(1, userId);
 		return pstmnt.executeQuery();
 	}

@@ -100,4 +100,6 @@
     <string name="selected">selected</string>
     <string name="TextView">SubItem</string>
     <string name="TextView1">TextView</string>
+    <string name="title_activity_selected_restaurant">SelectedRestaurant</string>
+    <string name="title_activity_update_preference">UpdatePreference</string>
 </resources>

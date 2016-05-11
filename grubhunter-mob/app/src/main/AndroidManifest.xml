@@ -1,55 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="edu.nyu.gh.grubhunter_mob" >
+    package="edu.nyu.gh.grubhunter_mob">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
-        <activity android:name=".Home" >
+        android:theme="@style/AppTheme">
+        <activity android:name=".Home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Registration_page" >
-
-            <!--
-      ATTENTION: This intent was auto-generated. Follow instructions at
-      https://g.co/AppIndexing/AndroidStudio to publish your URLs.
-            -->
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <!--
-                  ATTENTION: This data URL was auto-generated. We recommend that you use the HTTP scheme.
-                  TODO: Change the host or pathPrefix as necessary.
-                -->
-                <data
-                    android:host="grubhunter_mob.gh.nyu.edu"
-                    android:pathPrefix="/registration_page"
-                    android:scheme="http" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".Listing_page" >
-        </activity>
+        <activity android:name=".Registration" />
+        <activity android:name=".Listing" />
         <activity
-            android:name=".ScrollingActivity"
-            android:label="@string/title_activity_scrolling"
-            android:theme="@style/AppTheme" >
-        </activity>
+            android:name=".SelectedRestaurant"
+            android:label="@string/title_activity_selected_restaurant"
+            android:theme="@style/AppTheme" />
         <activity
-            android:name=".list"
-            android:label="@string/title_activity_list"
-            android:theme="@style/AppTheme" >
-        </activity>
+            android:name=".UpdatePreference"
+            android:label="@string/title_activity_update_preference"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
