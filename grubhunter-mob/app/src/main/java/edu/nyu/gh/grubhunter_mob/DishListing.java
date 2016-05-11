@@ -100,7 +100,7 @@ public class DishListing extends TableLayout implements RESTfulResult {
                         Map<String, Object> loginMap = new HashMap<String, Object>();
                         loginMap.put("url", Util.getProperty("rate_dis_url", getContext()));
                         loginMap.put("data", request);
-                        RESTfulPOST restFulPost = new RESTfulPOST(DishListing.this, getContext(), "Please Wait", "Login");
+                        RESTfulPOST restFulPost = new RESTfulPOST(DishListing.this, getContext(), "Please Wait", "RateDish");
                         restFulPost.execute(loginMap);
                         rankDialog.cancel();
                     }
