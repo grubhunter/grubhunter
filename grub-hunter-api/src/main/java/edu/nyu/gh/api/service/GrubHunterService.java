@@ -105,6 +105,7 @@ public class GrubHunterService {
 		try {
 			new GrubHunterDAO().insertRatings(request.getEmail(), request.getRestaurantId(), request.getDishId(),
 					request.getRating());
+			new UserRatingNotifierService().notifyUserRating(request.getEmail());
 			return new GrubSimpleResponse("success");
 		} catch (MySQLIntegrityConstraintViolationException e) {
 			e.printStackTrace();
